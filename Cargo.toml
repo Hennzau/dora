@@ -81,6 +81,28 @@ pyo3 = { version = "0.21", features = [
 ] }
 pythonize = "0.21"
 
+# Config for 'cargo dist'
+[workspace.metadata.dist]
+# The preferred cargo-dist version to use in CI (Cargo.toml SemVer syntax)
+cargo-dist-version = "0.22.1"
+# CI backends to support
+ci = "github"
+# The installers to generate for each app
+installers = ["shell", "powershell"]
+# Target platforms to build apps for (Rust target-triple syntax)
+targets = [
+    "aarch64-apple-darwin",
+    "x86_64-apple-darwin",
+    "x86_64-unknown-linux-gnu",
+    "x86_64-pc-windows-msvc",
+]
+# Path that installers should place binaries in
+install-path = "~/.dora/bin"
+# Whether to install an updater program
+install-updater = false
+# By default, don't include all binaries
+dist = false
+
 [package]
 name = "dora-examples"
 version = "0.0.0"
@@ -159,3 +181,8 @@ path = "examples/cmake-dataflow/run.rs"
 name = "cxx-ros2-dataflow"
 path = "examples/c++-ros2-dataflow/run.rs"
 required-features = ["ros2-examples"]
+
+# The profile that 'cargo dist' will build with
+[profile.dist]
+inherits = "release"
+lto = "thin"
