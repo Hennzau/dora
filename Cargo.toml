@@ -100,6 +100,8 @@ targets = [
 install-path = "~/.dora/bin"
 # Whether to install an updater program
 install-updater = false
+# By default disable distribution
+dist = false
 
 [package]
 name = "dora-examples"
